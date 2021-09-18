@@ -70,13 +70,15 @@ class Tags extends React.Component {
       tagTextStyle,
       deleteTagOnPress,
       onTagPress,
-      renderTag
+      renderTag,
+      providedTags
     } = this.props;
 
     return (
       <View style={[styles.container, containerStyle, style]}>
 
-        {this.state.tags.map((tag, index) => {
+        <View style={{flexDirection: 'row', alignSelf: 'flex-start', flexWrap: 'wrap'}}>
+        {(providedTags || this.state.tags).map((tag, index) => {
 
           const tagProps = {
             tag,
@@ -107,7 +109,8 @@ class Tags extends React.Component {
           };
 
           return renderTag(tagProps);
-        })}
+          })}
+        </View>
 
         {!readonly
           && maxNumberOfTags > this.state.tags.length
